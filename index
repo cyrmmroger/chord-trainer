@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chord Trainer 🎹</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <h1>Chord <span>Trainer</span></h1>
+    <p>Piano practice · Random chord flashcards</p>
+  </header>
+
+  <main class="app">
+
+    <!-- ── Chord display ── -->
+    <div class="card chord-stage">
+
+      <!-- Countdown ring -->
+      <div class="timer-wrap">
+        <svg viewBox="0 0 100 100" width="48" height="48">
+          <circle class="timer-bg" cx="50" cy="50" r="45"/>
+          <circle id="timer-ring"   cx="50" cy="50" r="45"/>
+        </svg>
+      </div>
+
+      <div id="chord-display">—</div>
+      <div id="chord-label">Press Start to begin</div>
+
+      <!-- Progress -->
+      <div class="progress-wrap">
+        <div class="progress-track">
+          <div id="progress-bar"></div>
+        </div>
+        <div id="progress-text"></div>
+      </div>
+    </div>
+
+    <!-- ── Transport controls ── -->
+    <div class="card">
+      <div class="controls">
+        <button id="btn-start">▶ Start</button>
+        <button id="btn-pause" disabled>⏸ Pause</button>
+        <button id="btn-stop"  disabled>■ Stop</button>
+      </div>
+    </div>
+
+    <!-- ── Settings ── -->
+    <div class="card">
+      <div class="section-label">Settings</div>
+      <div class="settings-grid">
+
+        <!-- Interval slider -->
+        <div class="setting">
+          <label for="interval-slider">Interval</label>
+          <div class="slider-row">
+            <input type="range" id="interval-slider" min="2" max="30" step="1" value="5" />
+            <span id="interval-value">5s</span>
+          </div>
+        </div>
+
+        <!-- Chord count -->
+        <div class="setting">
+          <label for="chord-count">Chord count</label>
+          <input type="number" id="chord-count" min="1" max="200" value="20" />
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── Chord categories ── -->
+    <div class="card">
+      <div class="section-label">Chord types</div>
+      <div class="categories">
+
+        <label class="toggle-row">
+          <input type="checkbox" class="category-toggle" data-category="triads" checked />
+          <span class="toggle-pill"></span>
+          <span class="toggle-label">Triads</span>
+          <span class="toggle-count">major, minor, dim, aug, sus2, sus4</span>
+        </label>
+
+        <label class="toggle-row">
+          <input type="checkbox" class="category-toggle" data-category="sevenths" checked />
+          <span class="toggle-pill"></span>
+          <span class="toggle-label">Seventh chords</span>
+          <span class="toggle-count">maj7, m7, dom7, dim7, ø7…</span>
+        </label>
+
+        <label class="toggle-row">
+          <input type="checkbox" class="category-toggle" data-category="extensions" checked />
+          <span class="toggle-pill"></span>
+          <span class="toggle-label">Extensions</span>
+          <span class="toggle-count">9th, 11th, 13th, add9…</span>
+        </label>
+
+      </div>
+    </div>
+
+    <!-- ── Session summary ── -->
+    <div id="summary-panel" class="hidden">
+      <div id="summary-text"></div>
+    </div>
+
+  </main>
+
+  <script src="chords.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
