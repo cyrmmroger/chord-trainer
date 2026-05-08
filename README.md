@@ -26,7 +26,7 @@ The app is hosted on GitHub Pages:
 ### Run it locally
 
 ```bash
-git clone https://github.com/cymmroger/piano-chord-trainer.git
+git clone https://github.com/cyrmmroger/piano-chord-trainer.git
 cd piano-chord-trainer
 ```
 
