@@ -49,7 +49,7 @@ piano-chord-trainer/
 ## Roadmap
 
 - [x] Core chord display + timer
-- [ ] UI controls (interval slider, chord count, start/pause/stop)
+- [x] UI controls (interval slider, chord count, start/pause/stop)
 - [ ] Chord type filter toggles
 - [ ] Progress bar + session summary
 - [ ] Self-scoring (did you get it right?)
