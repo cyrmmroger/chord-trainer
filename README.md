@@ -13,6 +13,7 @@ A lightweight, browser-based piano chord trainer. It cycles through random chord
 - **Session controls** — start, pause, and stop your practice session at any time
 - **Session summary** — see how many chords you practiced at the end of each session
 - **No install needed** — open it in a browser and start playing
+- **Mobile friendly** — made to display well on a mobile device which you can place in front of you on your piano stand while you play
 
 ---
 
