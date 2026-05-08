@@ -28,14 +28,29 @@ const categoryToggles = document.querySelectorAll('.category-toggle');
 const summaryPanel    = document.getElementById('summary-panel');
 const summaryText     = document.getElementById('summary-text');
 const timerRing       = document.getElementById('timer-ring');
+const themeToggleBtn  = document.getElementById('btn-theme-toggle');
 
 // ── Init ─────────────────────────────────────────────────────────────────────
 function init() {
   intervalSlider.value = state.intervalSeconds;
   intervalValue.textContent = state.intervalSeconds + 's';
   chordCountInput.value = state.totalChords;
+  applyStoredTheme();
   updateUI();
   rebuildPool();
+}
+
+// ── Theme ────────────────────────────────────────────────────────────────────
+function applyStoredTheme() {
+  const theme = localStorage.getItem('chord-trainer-theme') || 'dark';
+  document.body.classList.toggle('light', theme === 'light');
+  themeToggleBtn.textContent = theme === 'light' ? '☀' : '🌙';
+}
+
+function toggleTheme() {
+  const isLight = document.body.classList.toggle('light');
+  localStorage.setItem('chord-trainer-theme', isLight ? 'light' : 'dark');
+  themeToggleBtn.textContent = isLight ? '☀' : '🌙';
 }
 
 // ── Pool ─────────────────────────────────────────────────────────────────────
@@ -169,6 +184,7 @@ function updateUI() {
 startBtn.addEventListener('click', startSession);
 pauseBtn.addEventListener('click', pauseSession);
 stopBtn.addEventListener('click',  stopSession);
+themeToggleBtn.addEventListener('click', toggleTheme);
 
 intervalSlider.addEventListener('input', () => {
   state.intervalSeconds = parseInt(intervalSlider.value);

@@ -16,6 +16,23 @@
   --radius:      12px;
 }
 
+body.light {
+  --bg:          #f7f5ef;
+  --surface:     #ffffff;
+  --surface-2:   #efece4;
+  --border:      #d9d4c5;
+  --accent:      #b08a3a;
+  --accent-dim:  #d8c79a;
+  --text:        #1a1a1f;
+  --text-muted:  #6b6557;
+  --danger:      #b03a2e;
+}
+
+body, .card, button, #chord-display, #progress-bar, .toggle-pill,
+.toggle-pill::after, .timer-bg, #timer-ring {
+  transition: background 0.25s, color 0.25s, border-color 0.25s, stroke 0.25s;
+}
+
 /* ── Reset & base ───────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -34,6 +51,32 @@ body {
 header {
   text-align: center;
   margin-bottom: 2.5rem;
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  position: relative;
+}
+
+.theme-toggle {
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  font-size: 1rem;
+  line-height: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent-dim);
+  background: var(--surface-2);
 }
 
 header h1 {
