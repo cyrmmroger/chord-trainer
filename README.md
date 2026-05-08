@@ -21,7 +21,7 @@ A lightweight, browser-based piano chord trainer. It cycles through random chord
 ### Use it online
 
 The app is hosted on GitHub Pages:
-👉 **https://github.com/cyrmmroger/chord-trainer**
+👉 **https://cyrmmroger.github.io/chord-trainer/**
 
 ### Run it locally
 
