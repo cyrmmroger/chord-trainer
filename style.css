@@ -185,6 +185,60 @@ header p {
   min-height: 1.2em;
 }
 
+/* ── Keyboard preview ────────────────────────────────────── */
+.kbd-wrap {
+  width: 100%;
+  max-width: 280px;
+}
+
+.kbd-wrap.hidden,
+.reveal-chevron.hidden {
+  display: none;
+}
+
+.kbd {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
+}
+
+.kbd .key {
+  stroke: #0d0d0f;
+  stroke-width: 0.6;
+}
+
+.kbd .key.white { fill: #f0ede6; }
+.kbd .key.black { fill: #16161a; }
+.kbd .key.on    { fill: var(--accent); }
+.kbd .root-dot  { fill: #0d0d0f; }
+
+.reveal-chevron {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  line-height: 1;
+  transition: transform 0.2s ease, color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.reveal-chevron:hover:not(:disabled) {
+  background: transparent;
+  color: var(--accent);
+  border-color: var(--accent-dim);
+}
+
+.reveal-chevron.open {
+  transform: rotate(180deg);
+  color: var(--accent);
+  border-color: var(--accent-dim);
+}
+
 /* ── Progress ────────────────────────────────────────────── */
 .progress-wrap {
   width: 100%;
