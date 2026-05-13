@@ -29,6 +29,8 @@ const summaryPanel    = document.getElementById('summary-panel');
 const summaryText     = document.getElementById('summary-text');
 const timerRing       = document.getElementById('timer-ring');
 const themeToggleBtn  = document.getElementById('btn-theme-toggle');
+const revealBtn       = document.getElementById('btn-reveal-keys');
+const kbdWrap         = document.getElementById('kbd-wrap');
 
 // ── Init ─────────────────────────────────────────────────────────────────────
 function init() {
@@ -126,6 +128,11 @@ function showNextChord() {
   chordDisplay.textContent = chord.display;
   chordLabel.textContent   = chord.label;
 
+  // Prep keyboard for this chord, hidden until the user clicks the chevron
+  kbdWrap.innerHTML = renderKeyboard(chord.intervals, chord.root);
+  kbdWrap.classList.add('hidden');
+  revealBtn.classList.remove('open', 'hidden');
+
   // Animate in
   chordDisplay.classList.remove('pop');
   void chordDisplay.offsetWidth; // reflow
@@ -137,6 +144,10 @@ function showNextChord() {
 function resetDisplay() {
   chordDisplay.textContent = '—';
   chordLabel.textContent   = 'Press Start to begin';
+  kbdWrap.innerHTML = '';
+  kbdWrap.classList.add('hidden');
+  revealBtn.classList.add('hidden');
+  revealBtn.classList.remove('open');
   updateProgress();
 }
 
@@ -186,6 +197,11 @@ startBtn.addEventListener('click', startSession);
 pauseBtn.addEventListener('click', pauseSession);
 stopBtn.addEventListener('click',  stopSession);
 themeToggleBtn.addEventListener('click', toggleTheme);
+
+revealBtn.addEventListener('click', () => {
+  const nowHidden = kbdWrap.classList.toggle('hidden');
+  revealBtn.classList.toggle('open', !nowHidden);
+});
 
 intervalSlider.addEventListener('input', () => {
   intervalValue.textContent = intervalSlider.value + 's';

@@ -14,9 +14,9 @@ Ask once, in a single AskUserQuestion or compact prompt, for:
 1. **Key** — the lowercase identifier used in both files (e.g. `altered`). Must match `[a-z][a-z0-9_]*`.
 2. **Display label** — shown on the toggle row (e.g. `Altered dominants`).
 3. **Count blurb** — the small grey hint under the toggle (e.g. `7♭9, 7♯9, 7♯11, 7♭13…`).
-4. **Qualities** — a list of `{ suffix, name }` pairs. `suffix` is appended to the root glyph (use Unicode ♯ ♭ ° ø, **not** ASCII `#` `b`). `name` is the spoken form used in the label.
+4. **Qualities** — a list of `{ suffix, name, intervals }` triples. `suffix` is appended to the root glyph (use Unicode ♯ ♭ ° ø, **not** ASCII `#` `b`). `name` is the spoken form used in the label. `intervals` is the array of semitones above the root for the chord tones (e.g. `[0, 4, 7, 10]` for a dominant 7).
 
-If the user provides qualities informally, normalize them into the `{ suffix, name }` shape before showing them for confirmation.
+If the user provides qualities informally, normalize them into the `{ suffix, name, intervals }` shape before showing them for confirmation. If they don't know the intervals, derive them from standard music theory and surface them for review.
 
 ## Step 1 — `chords.js`
 
@@ -24,12 +24,12 @@ Add a new key to `QUALITIES` following the existing shape. Place it at the end o
 
 ```js
 altered: [
-  { suffix: '7♭9',  name: 'dominant 7 flat 9' },
-  { suffix: '7♯9',  name: 'dominant 7 sharp 9' },
+  { suffix: '7♭9', name: 'dominant 7 flat 9',  intervals: [0, 1, 4, 7, 10] },
+  { suffix: '7♯9', name: 'dominant 7 sharp 9', intervals: [0, 3, 4, 7, 10] },
 ],
 ```
 
-Do not touch `ROOTS`, `buildChordPool`, or `getRandomChord` — they iterate `QUALITIES[category]` generically.
+`intervals` is required — `keyboard.js` reads it to light up the right keys on the reveal. Keep entries mod 12 (the renderer collapses anything higher into the displayed octave). Do not touch `ROOTS`, `buildChordPool`, or `getRandomChord` — they iterate `QUALITIES[category]` generically.
 
 ## Step 2 — `index.html`
 
@@ -56,9 +56,11 @@ No build step. Tell the user to refresh the page (or rely on Live Server) and co
 - The new toggle appears in the Chord types card.
 - Toggling it off and starting a session never produces chords from the new category.
 - Toggling it on and starting a session does produce them.
+- When one of the new chords appears, clicking the chevron reveals a keyboard with the correct keys lit — quick sanity check that `intervals` is right.
 
 ## What NOT to do
 
 - Do not add tests, a build step, or a package.json — the project is intentionally dependency-free (per CLAUDE.md).
 - Do not use ASCII `#` or `b` in suffixes — the display uses Unicode ♯ ♭ ° ø.
 - Do not edit `buildChordPool` or `getRandomChord`; the generic loop already handles any new key.
+- Do not omit `intervals` on quality entries — `keyboard.js` will fail to render the reveal.
