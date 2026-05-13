@@ -9,6 +9,7 @@
   --surface-2:   #1e1e24;
   --border:      #2a2a35;
   --accent:      #e8c97e;   /* warm gold */
+  --accent-bright: #f0d898;
   --accent-dim:  #7a6535;
   --text:        #f0ede6;
   --text-muted:  #6b6880;
@@ -22,6 +23,7 @@ body.light {
   --surface-2:   #efece4;
   --border:      #d9d4c5;
   --accent:      #b08a3a;
+  --accent-bright: #c9a155;
   --accent-dim:  #d8c79a;
   --text:        #1a1a1f;
   --text-muted:  #6b6557;
@@ -250,8 +252,8 @@ button:disabled {
 }
 
 #btn-start:hover:not(:disabled) {
-  background: #f0d898;
-  border-color: #f0d898;
+  background: var(--accent-bright);
+  border-color: var(--accent-bright);
 }
 
 #btn-stop:hover:not(:disabled) {
