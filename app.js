@@ -62,10 +62,11 @@ function rebuildPool() {
 function startSession() {
   rebuildPool();
   if (state.chordPool.length === 0) {
-    alert('Please enable at least one chord category.');
+    summaryText.textContent = 'Enable at least one chord category to start.';
+    summaryPanel.classList.remove('hidden');
     return;
   }
-  state.totalChords   = parseInt(chordCountInput.value) || 20;
+  state.totalChords   = parseInt(chordCountInput.value, 10) || 20;
   state.chordsRemaining = state.totalChords;
   state.isRunning     = true;
   state.isPaused      = false;
@@ -78,28 +79,28 @@ function startSession() {
 
 function pauseSession() {
   if (!state.isRunning) return;
+  state.isPaused = !state.isPaused;
+  updateUI();
   if (state.isPaused) {
-    // Resume
-    state.isPaused = false;
-    pauseBtn.textContent = 'Pause';
-    scheduleNext();
-  } else {
-    // Pause
-    state.isPaused = true;
-    pauseBtn.textContent = 'Resume';
     clearInterval(state.intervalId);
     stopTimerAnimation();
+  } else {
+    scheduleNext();
   }
 }
 
-function stopSession() {
+function endSession() {
   clearInterval(state.intervalId);
   state.isRunning = false;
   state.isPaused  = false;
   stopTimerAnimation();
   showSummary();
-  resetDisplay();
   updateUI();
+}
+
+function stopSession() {
+  endSession();
+  resetDisplay();
 }
 
 function scheduleNext() {
@@ -108,7 +109,7 @@ function scheduleNext() {
   state.intervalId = setInterval(() => {
     if (state.chordsRemaining <= 1) {
       showNextChord();
-      stopSession();
+      endSession();
       return;
     }
     showNextChord();
@@ -187,14 +188,12 @@ stopBtn.addEventListener('click',  stopSession);
 themeToggleBtn.addEventListener('click', toggleTheme);
 
 intervalSlider.addEventListener('input', () => {
-  state.intervalSeconds = parseInt(intervalSlider.value);
-  intervalValue.textContent = state.intervalSeconds + 's';
-  // Restart timer with new interval if running
-  if (state.isRunning && !state.isPaused) scheduleNext();
+  intervalValue.textContent = intervalSlider.value + 's';
 });
 
-chordCountInput.addEventListener('change', () => {
-  state.totalChords = parseInt(chordCountInput.value) || 20;
+intervalSlider.addEventListener('change', () => {
+  state.intervalSeconds = parseInt(intervalSlider.value, 10);
+  if (state.isRunning && !state.isPaused) scheduleNext();
 });
 
 categoryToggles.forEach(toggle => {
