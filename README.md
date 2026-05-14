@@ -51,10 +51,10 @@ piano-chord-trainer/
 
 - [x] Core chord display + timer
 - [x] UI controls (interval slider, chord count, start/pause/stop)
+- [X] Visual piano diagrams
 - [ ] Chord type filter toggles
 - [ ] Progress bar + session summary
 - [ ] Self-scoring (did you get it right?)
-- [ ] Visual piano diagrams
 - [ ] Audio playback
 
 ---
