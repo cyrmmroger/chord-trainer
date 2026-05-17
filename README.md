@@ -8,6 +8,8 @@ A lightweight, browser-based piano chord trainer. It cycles through random chord
 ## Features
 
 - **Randomized chord drills** — cycles through a set of chords in random order so you can't just memorize the sequence
+- **chord playback** — play the chord in either block or arpeggio
+- **chord visual** — check on an octave the corresponding notes
 - **Configurable timer** — set the interval between chords to match your current skill level
 - **Chord type filters** — focus on what you're working on (major, minor, 7th chords, etc.)
 - **Session controls** — start, pause, and stop your practice session at any time
@@ -52,6 +54,7 @@ piano-chord-trainer/
 - [x] Core chord display + timer
 - [x] UI controls (interval slider, chord count, start/pause/stop)
 - [X] Visual piano diagrams
+- [X] Chord playback
 - [ ] Chord type filter toggles
 - [ ] Progress bar + session summary
 - [ ] Self-scoring (did you get it right?)
