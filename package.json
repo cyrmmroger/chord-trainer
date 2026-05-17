@@ -1,0 +1,11 @@
+{
+  "name": "chord-trainer",
+  "private": true,
+  "description": "Browser-only piano chord trainer. Tests only; production app has no runtime deps.",
+  "scripts": {
+    "test": "node --test \"tests/*.test.js\""
+  },
+  "devDependencies": {
+    "jsdom": "^24.0.0"
+  }
+}
