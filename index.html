@@ -33,7 +33,10 @@
       <div id="chord-label">Press Start to begin</div>
 
       <!-- Keyboard reveal -->
-      <button id="btn-reveal-keys" class="reveal-chevron hidden" aria-label="Show keyboard">▾</button>
+      <div class="reveal-row">
+        <button id="btn-reveal-keys" class="reveal-chevron hidden" aria-label="Show keyboard">▾</button>
+        <button id="btn-replay-chord" class="replay-btn hidden" aria-label="Replay chord">↻</button>
+      </div>
       <div id="kbd-wrap" class="kbd-wrap hidden"></div>
 
       <!-- Progress -->
@@ -72,6 +75,21 @@
         <div class="setting">
           <label for="chord-count">Chord count</label>
           <input type="number" id="chord-count" min="1" max="200" value="20" />
+        </div>
+
+        <!-- Playback mode -->
+        <div class="setting" title="How the chord plays back when you reveal it">
+          <label>Playback</label>
+          <div class="segmented" role="radiogroup" aria-label="Playback mode">
+            <label class="segmented-option" for="playback-block">
+              <input type="radio" name="playback-mode" value="block" id="playback-block" checked />
+              <span>Chord</span>
+            </label>
+            <label class="segmented-option" for="playback-arpeggio">
+              <input type="radio" name="playback-mode" value="arpeggio" id="playback-arpeggio" />
+              <span>Arpeggio</span>
+            </label>
+          </div>
         </div>
 
       </div>
@@ -115,6 +133,8 @@
 
   <script src="chords.js"></script>
   <script src="keyboard.js"></script>
+  <script src="https://unpkg.com/soundfont-player@0.12.0/dist/soundfont-player.js"></script>
+  <script src="audio.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

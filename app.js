@@ -11,7 +11,9 @@ const state = {
   totalChords: 20,
   intervalSeconds: 5,
   enabledCategories: ['triads', 'sevenths', 'extensions'],
+  arpeggio: false,
 };
+window.state = state;
 
 // ── DOM refs ─────────────────────────────────────────────────────────────────
 const chordDisplay    = document.getElementById('chord-display');
@@ -30,7 +32,9 @@ const summaryText     = document.getElementById('summary-text');
 const timerRing       = document.getElementById('timer-ring');
 const themeToggleBtn  = document.getElementById('btn-theme-toggle');
 const revealBtn       = document.getElementById('btn-reveal-keys');
+const replayBtn       = document.getElementById('btn-replay-chord');
 const kbdWrap         = document.getElementById('kbd-wrap');
+const playbackRadios  = document.querySelectorAll('input[name="playback-mode"]');
 
 // ── Init ─────────────────────────────────────────────────────────────────────
 function init() {
@@ -121,6 +125,7 @@ function scheduleNext() {
 
 // ── Chord display ─────────────────────────────────────────────────────────────
 function showNextChord() {
+  stopAllNotes();
   state.chordsRemaining--;
   const chord = getRandomChord(state.chordPool);
   state.currentChord = chord;
@@ -132,6 +137,7 @@ function showNextChord() {
   kbdWrap.innerHTML = renderKeyboard(chord.intervals, chord.root);
   kbdWrap.classList.add('hidden');
   revealBtn.classList.remove('open', 'hidden');
+  replayBtn.classList.add('hidden');
 
   // Animate in
   chordDisplay.classList.remove('pop');
@@ -142,12 +148,14 @@ function showNextChord() {
 }
 
 function resetDisplay() {
+  stopAllNotes();
   chordDisplay.textContent = '—';
   chordLabel.textContent   = 'Press Start to begin';
   kbdWrap.innerHTML = '';
   kbdWrap.classList.add('hidden');
   revealBtn.classList.add('hidden');
   revealBtn.classList.remove('open');
+  replayBtn.classList.add('hidden');
   updateProgress();
 }
 
@@ -201,6 +209,26 @@ themeToggleBtn.addEventListener('click', toggleTheme);
 revealBtn.addEventListener('click', () => {
   const nowHidden = kbdWrap.classList.toggle('hidden');
   revealBtn.classList.toggle('open', !nowHidden);
+  replayBtn.classList.toggle('hidden', nowHidden);
+  if (!nowHidden && state.currentChord) {
+    playChord(state.currentChord.root, state.currentChord.intervals, {
+      mode: state.arpeggio ? 'arpeggio' : 'block',
+    });
+  }
+});
+
+replayBtn.addEventListener('click', () => {
+  if (!state.currentChord) return;
+  stopAllNotes();
+  playChord(state.currentChord.root, state.currentChord.intervals, {
+    mode: state.arpeggio ? 'arpeggio' : 'block',
+  });
+});
+
+playbackRadios.forEach(radio => {
+  radio.addEventListener('change', () => {
+    if (radio.checked) state.arpeggio = (radio.value === 'arpeggio');
+  });
 });
 
 intervalSlider.addEventListener('input', () => {

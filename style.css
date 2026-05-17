@@ -192,8 +192,16 @@ header p {
 }
 
 .kbd-wrap.hidden,
-.reveal-chevron.hidden {
+.reveal-chevron.hidden,
+.replay-btn.hidden {
   display: none;
+}
+
+.reveal-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .kbd {
@@ -237,6 +245,30 @@ header p {
   transform: rotate(180deg);
   color: var(--accent);
   border-color: var(--accent-dim);
+}
+
+.replay-btn {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1;
+  transition: transform 0.2s ease, color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.replay-btn:hover:not(:disabled) {
+  background: transparent;
+  color: var(--accent);
+  border-color: var(--accent-dim);
+}
+
+.replay-btn:active {
+  transform: rotate(-180deg);
 }
 
 /* ── Progress ────────────────────────────────────────────── */
@@ -436,6 +468,43 @@ input[type="number"]:focus {
   font-size: 0.68rem;
   color: var(--text-muted);
   margin-left: auto;
+}
+
+/* Segmented control (used for Playback: Chord / Arpeggio). */
+.segmented {
+  display: inline-flex;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.setting label.segmented-option {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 0;
+  padding: 0.3rem 0.9rem;
+  border-radius: 99px;
+  cursor: pointer;
+  font-size: 0.78rem;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--text-muted);
+  transition: background 0.15s, color 0.15s;
+}
+
+.segmented-option input[type="radio"] {
+  display: none;
+}
+
+.segmented-option:has(input:checked) {
+  background: var(--accent-dim);
+  color: var(--text);
+}
+
+.segmented-option:hover:not(:has(input:checked)) {
+  color: var(--text);
 }
 
 /* ── Summary ─────────────────────────────────────────────── */
