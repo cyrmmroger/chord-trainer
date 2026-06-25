@@ -24,12 +24,12 @@ A lightweight, browser-based piano chord trainer. It cycles through random chord
 ### Use it online
 
 The app is hosted on GitHub Pages:
-👉 **https://cyrmmroger.github.io/chord-trainer/**
+👉 **https://cymroger.github.io/chord-trainer/**
 
 ### Run it locally
 
 ```bash
-git clone https://github.com/cyrmmroger/piano-chord-trainer.git
+git clone https://github.com/cymroger/piano-chord-trainer.git
 cd piano-chord-trainer
 ```
 
